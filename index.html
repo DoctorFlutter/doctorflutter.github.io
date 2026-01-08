@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vivek Raval | DoctorFlutter</title>
     <meta name="description" content="Portfolio of Vivek Raval - Flutter & iOS Developer">
-    <meta name="google-site-verification" content="x-azYPY0XkUcah_IefN_xIFsfKaNng2l_ETq32RuSx4" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -24,9 +25,11 @@
                         flutterLight: '#0175C2',
                         darkBg: '#0f172a',
                         cardBg: '#1e293b',
+                        accent: '#38bdf8',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         float: {
@@ -40,25 +43,42 @@
     </script>
 
     <style>
-        /* Glassmorphism Effect */
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0175C2;
+        }
+
+        /* Glassmorphism */
         .glass {
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
         
         /* Gradient Text */
         .text-gradient {
-            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* Cursor Blinking */
         .cursor {
             display: inline-block;
             width: 3px;
-            background-color: #00f2fe;
+            background-color: #38bdf8;
             animation: blink 1s infinite;
         }
 
@@ -66,118 +86,242 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="bg-darkBg text-white antialiased selection:bg-flutter selection:text-white">
+<body class="bg-darkBg text-white antialiased selection:bg-accent selection:text-darkBg overflow-x-hidden">
 
-    <nav class="fixed w-full z-50 glass shadow-lg">
+    <nav class="fixed w-full z-50 glass transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold tracking-wide">
-                Doctor<span class="text-flutterLight">Flutter</span>
+            <a href="#" class="text-2xl font-bold tracking-wide flex items-center gap-2">
+                <i class="fa-solid fa-code text-accent"></i>
+                <span>Doctor<span class="text-flutterLight">Flutter</span></span>
             </a>
+            
             <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#home" class="hover:text-flutterLight transition">Home</a>
-                <a href="#about" class="hover:text-flutterLight transition">About</a>
-                <a href="#skills" class="hover:text-flutterLight transition">Skills</a>
-                <a href="#contact" class="hover:text-flutterLight transition">Contact</a>
+                <a href="#home" class="nav-link hover:text-accent transition relative group">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#about" class="nav-link hover:text-accent transition relative group">
+                    About
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#skills" class="nav-link hover:text-accent transition relative group">
+                    Skills
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="nav-link hover:text-accent transition relative group">
+                    Contact
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
+                </a>
             </div>
-            <button class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-gray-300 hover:text-white focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-gray-700 absolute w-full">
+            <div class="px-6 py-4 space-y-3 flex flex-col">
+                <a href="#home" class="mobile-link block text-gray-300 hover:text-white">Home</a>
+                <a href="#about" class="mobile-link block text-gray-300 hover:text-white">About</a>
+                <a href="#skills" class="mobile-link block text-gray-300 hover:text-white">Skills</a>
+                <a href="#contact" class="mobile-link block text-gray-300 hover:text-white">Contact</a>
+            </div>
         </div>
     </nav>
 
     <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
-        <div class="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s"></div>
+        <div class="absolute top-20 left-10 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-pulse-slow" style="animation-delay: 2s"></div>
 
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div>
-                <span class="text-flutterLight font-semibold tracking-wider uppercase mb-2 block">Hello, I'm</span>
-                <h1 class="text-5xl md:text-7xl font-bold mb-4">Vivek <span class="text-gradient">Raval</span></h1>
-                <h2 class="text-2xl md:text-3xl font-light text-gray-300 mb-6 flex items-center">
-                    I am a&nbsp;<span id="typing-text" class="font-semibold text-white"></span><span class="cursor">&nbsp;</span>
+            <div class="order-2 md:order-1 reveal active">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-accent uppercase bg-blue-900/30 rounded-full border border-blue-800">
+                    Available for Work
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Hi, I'm <br>
+                    <span class="text-gradient">Vivek Raval</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-light text-gray-300 mb-6 flex items-center h-10">
+                    <span id="typing-text" class="font-semibold text-white"></span><span class="cursor">&nbsp;</span>
                 </h2>
                 <p class="text-gray-400 mb-8 text-lg max-w-lg leading-relaxed">
-                    Experienced App & iOS Developer specializing in <span class="text-flutterLight font-bold">Flutter</span>. 
-                    Passionately building innovative mobile experiences for clients worldwide.
+                    I craft high-performance mobile applications using <span class="text-flutterLight font-bold">Flutter</span>. 
+                    Turning complex ideas into smooth, user-friendly digital experiences.
                 </p>
                 
-                <div class="flex space-x-4">
-                    <a href="https://linkedin.com/in/raval-vivek-6b0823223" target="_blank" class="px-8 py-3 bg-flutter hover:bg-flutterLight text-white rounded-full font-semibold shadow-lg transition transform hover:-translate-y-1">
-                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                <div class="flex flex-wrap gap-4">
+                    <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-full font-semibold shadow-lg shadow-blue-500/30 transition transform hover:-translate-y-1">
+                        Let's Talk
                     </a>
-                    <a href="https://github.com/doctorflutter" target="_blank" class="px-8 py-3 glass hover:bg-gray-700 text-white rounded-full font-semibold transition transform hover:-translate-y-1">
-                        <i class="fab fa-github mr-2"></i> GitHub
+                    <a href="https://github.com/doctorflutter" target="_blank" class="px-8 py-3 glass hover:bg-gray-800/50 text-white rounded-full font-semibold transition transform hover:-translate-y-1 flex items-center gap-2">
+                        <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
             </div>
 
-            <div class="flex justify-center md:justify-end">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-blue-500 to-purple-500 animate-float">
-                    <img src="https://avatars.githubusercontent.com/u/doctorflutter" onerror="this.src='https://ui-avatars.com/api/?name=Vivek+Raval&background=0D8ABC&color=fff&size=256'" alt="Vivek Raval" class="w-full h-full object-cover rounded-full border-4 border-darkBg">
+            <div class="order-1 md:order-2 flex justify-center md:justify-end reveal active">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full animate-spin-slow opacity-70 blur-md"></div>
+                    <div class="relative w-full h-full rounded-full p-1 bg-darkBg overflow-hidden border-4 border-gray-800 animate-float">
+                        <img src="profile.jpg" alt="Vivek Raval" class="w-full h-full object-cover rounded-full hover:scale-110 transition duration-700">
+                    </div>
                 </div>
             </div>
         </div>
+
+        <a href="#about" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500 hover:text-white transition">
+            <i class="fas fa-chevron-down text-xl"></i>
+        </a>
     </section>
 
-    <section id="skills" class="py-20 bg-darkBg">
+    <section id="about" class="py-24 bg-darkBg relative">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">My <span class="text-gradient">Tech Stack</span></h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center">
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Flutter">
-                    <h3 class="font-semibold">Flutter</h3>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl opacity-30 blur-lg"></div>
+                        <div class="glass p-8 rounded-xl relative">
+                            <i class="fas fa-quote-left text-4xl text-blue-500/50 mb-4 block"></i>
+                            <p class="text-lg text-gray-300 italic leading-relaxed">
+                                "I am a Sincere Boy 😜 who loves code. My passion lies in building scalable mobile architectures and exploring the depths of Dart."
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Dart">
-                    <h3 class="font-semibold">Dart</h3>
-                </div>
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" class="w-12 h-12 mx-auto mb-3" alt="Android">
-                    <h3 class="font-semibold">Android</h3>
-                </div>
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Firebase">
-                    <h3 class="font-semibold">Firebase</h3>
-                </div>
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="w-12 h-12 mx-auto mb-3" alt="Python">
-                    <h3 class="font-semibold">Python</h3>
-                </div>
-                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" class="w-12 h-12 mx-auto mb-3" alt="Java">
-                    <h3 class="font-semibold">Java</h3>
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">About <span class="text-gradient">Me</span></h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I am an experienced App & iOS Developer with a strong specialization in **Flutter technology**. 
+                        I have successfully developed and deployed numerous projects for clients across various industries.
+                    </p>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Beyond coding, I am an MCA student constantly learning new patterns in software engineering. 
+                        I believe in writing clean, maintainable code that stands the test of time.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass p-4 rounded-lg text-center">
+                            <span class="block text-3xl font-bold text-white mb-1">5+</span>
+                            <span class="text-sm text-gray-400">Projects Completed</span>
+                        </div>
+                        <div class="glass p-4 rounded-lg text-center">
+                            <span class="block text-3xl font-bold text-white mb-1">100%</span>
+                            <span class="text-sm text-gray-400">Dedication</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 relative">
-        <div class="absolute inset-0 bg-blue-900 opacity-5"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Work <span class="text-gradient">Together</span></h2>
-            <p class="text-gray-400 mb-10 text-lg">
-                Have a project in mind or just want to chat about Flutter? Feel free to reach out.
+    <section id="skills" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-900/10 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">My <span class="text-gradient">Tech Stack</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Tools and technologies I use to bring products to life.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-blue-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" class="w-12 h-12" alt="Flutter">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-blue-400">Flutter</h3>
+                </div>
+
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-blue-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" class="w-12 h-12" alt="Dart">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-blue-400">Dart</h3>
+                </div>
+
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-green-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" class="w-12 h-12" alt="Android">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-green-400">Android</h3>
+                </div>
+
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-yellow-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" class="w-12 h-12" alt="Firebase">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-yellow-400">Firebase</h3>
+                </div>
+
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-blue-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="w-12 h-12" alt="Python">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-blue-400">Python</h3>
+                </div>
+
+                <div class="reveal glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:-translate-y-2 hover:shadow-red-500/20 hover:shadow-lg group text-center cursor-default">
+                    <div class="h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" class="w-12 h-12" alt="Java">
+                    </div>
+                    <h3 class="font-semibold text-gray-200 group-hover:text-red-400">Java</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative">
+        <div class="absolute inset-0 bg-blue-900/5 clip-path-slant"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Work <span class="text-gradient">Together</span></h2>
+            <p class="text-gray-400 mb-10 text-lg max-w-2xl mx-auto">
+                Have a project in mind or just want to chat about Flutter architecture? 
+                I'm always open to discussing new projects and creative ideas.
             </p>
             
-            <a href="mailto:ravalvivek2115@gmail.com" class="inline-flex items-center px-8 py-4 bg-white text-flutter font-bold text-lg rounded-full shadow-lg hover:shadow-xl hover:bg-gray-100 transition duration-300">
-                <i class="fas fa-envelope mr-3"></i> ravalvivek2115@gmail.com
-            </a>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="mailto:ravalvivek2115@gmail.com" class="group px-8 py-4 bg-white text-darkBg font-bold text-lg rounded-full shadow-lg hover:shadow-white/20 transition transform hover:-translate-y-1 flex items-center gap-3">
+                    <i class="fas fa-envelope group-hover:text-flutter transition"></i>
+                    ravalvivek2115@gmail.com
+                </a>
+                
+                <a href="https://linkedin.com/in/raval-vivek-6b0823223" target="_blank" class="px-8 py-4 glass text-white font-bold text-lg rounded-full hover:bg-blue-600/20 transition transform hover:-translate-y-1">
+                    Connect on LinkedIn
+                </a>
+            </div>
 
-            <div class="mt-12 flex justify-center space-x-8">
-                <a href="https://linkedin.com/in/raval-vivek-6b0823223" class="text-gray-400 hover:text-white text-3xl transition"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/doctorflutter" class="text-gray-400 hover:text-white text-3xl transition"><i class="fab fa-github"></i></a>
-                <a href="https://instagram.com/r_a_v_a_l_v_i_v_e_k_3" class="text-gray-400 hover:text-pink-500 text-3xl transition"><i class="fab fa-instagram"></i></a>
+            <div class="mt-16 flex justify-center space-x-10">
+                <a href="https://linkedin.com/in/raval-vivek-6b0823223" class="text-gray-500 hover:text-white text-3xl transition transform hover:scale-110"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/doctorflutter" class="text-gray-500 hover:text-white text-3xl transition transform hover:scale-110"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/r_a_v_a_l_v_i_v_e_k_3" class="text-gray-500 hover:text-pink-500 text-3xl transition transform hover:scale-110"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </section>
 
     <footer class="py-8 text-center text-gray-500 text-sm glass border-t border-gray-800">
-        <p>&copy; 2024 Vivek Raval (DoctorFlutter). All rights reserved.</p>
-        <p class="mt-2 text-xs">Verified Publisher for <a href="https://pub.dev" class="text-flutter hover:underline">pub.dev</a></p>
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2024 Vivek Raval (DoctorFlutter)</p>
+            <p class="mt-2 md:mt-0 flex items-center gap-2">
+                <i class="fas fa-shield-alt text-blue-500"></i> Verified Publisher for <a href="https://pub.dev" class="text-flutterLight hover:underline font-semibold">pub.dev</a>
+            </p>
+        </div>
     </footer>
 
     <script>
+        // Typing Animation
         const textElement = document.getElementById('typing-text');
         const phrases = ["Flutter Developer", "iOS Developer", "Sincere Boy 😜", "Tech Enthusiast"];
         let phraseIndex = 0;
@@ -200,7 +344,7 @@
 
             if (!isDeleting && charIndex === currentPhrase.length) {
                 isDeleting = true;
-                typeSpeed = 2000; // Pause at end
+                typeSpeed = 2000;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
@@ -211,6 +355,40 @@
         }
 
         document.addEventListener('DOMContentLoaded', type);
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
     </script>
 </body>
 </html>
