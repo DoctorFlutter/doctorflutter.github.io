@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Raval | DoctorFlutter</title>
+    <meta name="description" content="Portfolio of Vivek Raval - Flutter & iOS Developer">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        flutter: '#02569B',
+                        flutterLight: '#0175C2',
+                        darkBg: '#0f172a',
+                        cardBg: '#1e293b',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #00f2fe;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-white antialiased selection:bg-flutter selection:text-white">
+
+    <nav class="fixed w-full z-50 glass shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-wide">
+                Doctor<span class="text-flutterLight">Flutter</span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#home" class="hover:text-flutterLight transition">Home</a>
+                <a href="#about" class="hover:text-flutterLight transition">About</a>
+                <a href="#skills" class="hover:text-flutterLight transition">Skills</a>
+                <a href="#contact" class="hover:text-flutterLight transition">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style="animation-delay: 2s"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div>
+                <span class="text-flutterLight font-semibold tracking-wider uppercase mb-2 block">Hello, I'm</span>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4">Vivek <span class="text-gradient">Raval</span></h1>
+                <h2 class="text-2xl md:text-3xl font-light text-gray-300 mb-6 flex items-center">
+                    I am a&nbsp;<span id="typing-text" class="font-semibold text-white"></span><span class="cursor">&nbsp;</span>
+                </h2>
+                <p class="text-gray-400 mb-8 text-lg max-w-lg leading-relaxed">
+                    Experienced App & iOS Developer specializing in <span class="text-flutterLight font-bold">Flutter</span>. 
+                    Passionately building innovative mobile experiences for clients worldwide.
+                </p>
+                
+                <div class="flex space-x-4">
+                    <a href="https://linkedin.com/in/raval-vivek-6b0823223" target="_blank" class="px-8 py-3 bg-flutter hover:bg-flutterLight text-white rounded-full font-semibold shadow-lg transition transform hover:-translate-y-1">
+                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/doctorflutter" target="_blank" class="px-8 py-3 glass hover:bg-gray-700 text-white rounded-full font-semibold transition transform hover:-translate-y-1">
+                        <i class="fab fa-github mr-2"></i> GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center md:justify-end">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-tr from-blue-500 to-purple-500 animate-float">
+                    <img src="https://avatars.githubusercontent.com/u/doctorflutter" onerror="this.src='https://ui-avatars.com/api/?name=Vivek+Raval&background=0D8ABC&color=fff&size=256'" alt="Vivek Raval" class="w-full h-full object-cover rounded-full border-4 border-darkBg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 bg-darkBg">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">My <span class="text-gradient">Tech Stack</span></h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 text-center">
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Flutter">
+                    <h3 class="font-semibold">Flutter</h3>
+                </div>
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Dart">
+                    <h3 class="font-semibold">Dart</h3>
+                </div>
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" class="w-12 h-12 mx-auto mb-3" alt="Android">
+                    <h3 class="font-semibold">Android</h3>
+                </div>
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" class="w-12 h-12 mx-auto mb-3" alt="Firebase">
+                    <h3 class="font-semibold">Firebase</h3>
+                </div>
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="w-12 h-12 mx-auto mb-3" alt="Python">
+                    <h3 class="font-semibold">Python</h3>
+                </div>
+                <div class="glass p-6 rounded-xl hover:bg-gray-800 transition duration-300 transform hover:scale-105">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" class="w-12 h-12 mx-auto mb-3" alt="Java">
+                    <h3 class="font-semibold">Java</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 relative">
+        <div class="absolute inset-0 bg-blue-900 opacity-5"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Let's Work <span class="text-gradient">Together</span></h2>
+            <p class="text-gray-400 mb-10 text-lg">
+                Have a project in mind or just want to chat about Flutter? Feel free to reach out.
+            </p>
+            
+            <a href="mailto:ravalvivek2115@gmail.com" class="inline-flex items-center px-8 py-4 bg-white text-flutter font-bold text-lg rounded-full shadow-lg hover:shadow-xl hover:bg-gray-100 transition duration-300">
+                <i class="fas fa-envelope mr-3"></i> ravalvivek2115@gmail.com
+            </a>
+
+            <div class="mt-12 flex justify-center space-x-8">
+                <a href="https://linkedin.com/in/raval-vivek-6b0823223" class="text-gray-400 hover:text-white text-3xl transition"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/doctorflutter" class="text-gray-400 hover:text-white text-3xl transition"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/r_a_v_a_l_v_i_v_e_k_3" class="text-gray-400 hover:text-pink-500 text-3xl transition"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 text-center text-gray-500 text-sm glass border-t border-gray-800">
+        <p>&copy; 2024 Vivek Raval (DoctorFlutter). All rights reserved.</p>
+        <p class="mt-2 text-xs">Verified Publisher for <a href="https://pub.dev" class="text-flutter hover:underline">pub.dev</a></p>
+    </footer>
+
+    <script>
+        const textElement = document.getElementById('typing-text');
+        const phrases = ["Flutter Developer", "iOS Developer", "Sincere Boy 😜", "Tech Enthusiast"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 150;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
+    </script>
+</body>
+</html>
